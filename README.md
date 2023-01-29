@@ -5,13 +5,13 @@ Bundle of bash scripts to automate tasks in Proxmox VE.
 Script for crontab, it must be appended with arguments of auto snapshot period and scope of virtual objects.
 
 ### Syntax: ###
-/path/to/script/pveAutoSnap.sh **$timePeiod** **$scope**
+/path/to/script/**pveAutoSnap.sh** **[timePeriod] [objectScope]**
 
 Where:
 
-**$timePeiod** can be *15min*, *hourly*, *4hours*, *daily*
+**[timePeriod]** can be *15min*, *hourly*, *4hours*, *daily*
 
-**$scope** can be only *running* or *all*
+**[objectScope]** can be only *running* or *all*
 
 ### Example of usage: ###
 ```
