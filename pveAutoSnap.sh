@@ -32,7 +32,7 @@ else    {
 fi
 
 if [[ $filterObj == "running" ]]
-        then break
+        then filterObj="running"
 elif [[ $filterObj == "all" ]]
         then filterObj="running|stopped"
 else    {
