@@ -53,7 +53,7 @@ for i in "${pctList[@]}"
 
 for i in "${qmList[@]}"
         do
-        qm snapshot $i auto_"$timePeriod"_$(date +"%Y-%m-%d_%H-%M-%S") --description "Auto Snapshot KVM ($j) from cron job."
+        qm snapshot $i auto_"$timePeriod"_$(date +"%Y-%m-%d_%H-%M-%S") --description "Auto Snapshot KVM ($i) from cron job."
         done
 
 # Run purging old snapshots
