@@ -75,7 +75,7 @@ for j in "${virtID[@]}"
         do
           if [[ $j == $i ]]
           then  {
-                handledObj++
+                ((handledObj++))
                 echo "Removing snapshots for LXC $(pct config $i | grep hostname) ($i)..."
                 pct listsnapshot $i | grep -v current | awk -F ">" '{ print $2 }' | awk '{ print $1 }' | xargs -n 1 pct delsnapshot $i
                 }
@@ -86,7 +86,7 @@ for j in "${virtID[@]}"
         do
           if [[ $j == $i ]]
           then  {
-                handledObj++
+                ((handledObj++))
                 echo "Removing snapshots for KVM $(qm config $i | grep name) ($i)..."
                 qm listsnapshot $i | grep -v current | awk -F ">" '{ print $2 }' | awk '{ print $1 }' | xargs -n 1 qm delsnapshot $i
                 }
