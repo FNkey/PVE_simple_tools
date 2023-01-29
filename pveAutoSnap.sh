@@ -48,16 +48,16 @@ declare -a qmList=($(qm list | grep -E "$filterObj" | awk '{ print $1 }'))
 # Run snapshotting
 for i in "${pctList[@]}"
         do
-        pct set $i --lock snapshot
+        ### pct set $i --lock snapshot
         pct snapshot $i auto_"$timePeriod"_$(date +"%Y-%m-%d_%H-%M-%S") --description "Auto Snapshot LXC ($i) from cron job."
-        pct unlock $i
+        ### pct unlock $i
         done
 
 for i in "${qmList[@]}"
         do
-        qm set $i --lock snapshot
+        ### qm set $i --lock snapshot
         qm snapshot $i auto_"$timePeriod"_$(date +"%Y-%m-%d_%H-%M-%S") --description "Auto Snapshot KVM ($i) from cron job."
-        qm unlock $i
+        ### qm unlock $i
         done
 
 # Run purging old snapshots
@@ -66,9 +66,9 @@ do
   let snapCounter=($(pct listsnapshot $i | grep "auto_$timePeriod" | wc -l)-$snapRotate)
   if [[ "$snapCounter" -gt 0 ]]
   then  {
-  pct set $i --lock snapshot-delete
+  ### pct set $i --lock snapshot-delete
   pct listsnapshot $i | grep "auto_$timePeriod" | awk -F ">" '{ print $2 }' | awk '{ print $1 }' | head -n $snapCounter | xargs -n 1 pct delsnapshot $i
-  pct unlock $i
+  ### pct unlock $i
   }
   fi
 done
@@ -78,9 +78,9 @@ do
   let snapCounter=($(qm listsnapshot $i | grep "auto_$timePeriod" | wc -l)-$snapRotate)
   if [[ "$snapCounter" -gt 0 ]]
   then  {
-  qm set $i --lock snapshot-delete
+  ### qm set $i --lock snapshot-delete
   qm listsnapshot $i | grep "auto_$timePeriod" | awk -F ">" '{ print $2 }' | awk '{ print $1 }' | head -n $snapCounter | xargs -n 1 qm delsnapshot $i
-  qm unlock $i
+  ### qm unlock $i
   }
   fi
 done
